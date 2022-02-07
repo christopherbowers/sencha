@@ -10,4 +10,4 @@ class Ticket(models.Model):
     description = models.TextField()
     priority = models.CharField(max_length=25)
     status = models.CharField(max_length=25)
-    closed_at = models.DateTimeField(blank=True)
+    closed_at = models.DateTimeField(null=True, blank=True)
