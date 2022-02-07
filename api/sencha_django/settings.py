@@ -36,7 +36,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'sencha',
+    'users',
+    'tickets',
     'rest_framework',
     'corsheaders',
 ]
@@ -59,23 +60,14 @@ CORS_ALLOWED_ORIGIN = [
 ]
 
 REST_FRAMEWORK = {
-  'DEFAULT_PERMISSION_CLASSES': [
-    'rest_framework.permissions.IsAuthenticated',
-  ],
-  'DEFAULT_AUTHENTICATION_CLASSES': (
-    'rest_framework_simplejwt.authentication.JWTAuthentication',
-    # 'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
-    # 'rest_framework.authentication.SessionAuthentication',
-    # 'rest_framework.authentication.BasicAuthentication',
-  ),
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ],
 }
 
 SIMPLE_JWT = {
   'ACCESS_TOKEN_LIFETIME': timedelta(minutes=30),
   'REFRESH_TOKEN_LIFETIME': timedelta(days=7),
-  'ROTATE_REFRESH_TOKENS': False,
-  'AUTH_HEADER_TYPES': ('Bearer', ),
-  'AUTH_TOKEN_CLASES': ('rest_framework_simplejwt.tokens.AccessToken', )
 }
 
 
