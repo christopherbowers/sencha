@@ -35,4 +35,4 @@ Technologies used in this project.
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/be9b96c4-ebdd-46eb-973b-9eaef57a4e76/deploy-status)](https://app.netlify.com/sites/sencha-app/deploys) ![Heroku](https://pyheroku-badge.herokuapp.com/?app=drby-app)
 
-<http://sencha-app.netlify.app>
+🔗 <http://sencha-app.netlify.app>
