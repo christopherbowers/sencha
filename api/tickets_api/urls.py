@@ -1,5 +1,5 @@
 from django.urls import path
-# from .views import PostList, PostDetail
+from .views import TicketList, TicketDetails
 
 # from rest_framework_simplejwt.views import (
 #     TokenObtainPairView,
@@ -9,6 +9,6 @@ from django.urls import path
 app_name = 'tickets_api'
 
 urlpatterns = [
-    # path('<int:pk>/', PostDetail.as_view(), name='detailcreate'),
-    # path('', PostList.as_view(), name='listcreate'),
+    path('<int:pk>/', TicketDetails.as_view(), name='ticket_detail'),
+    path('', TicketList.as_view(), name='ticket_list'),
 ]
