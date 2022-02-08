@@ -27,11 +27,8 @@ class Ticket(models.Model):
     status = models.CharField(max_length=10, choices=status_options, default='open')
     closed_at = models.DateTimeField(null=True, blank=True)
 
-    tickets = models.Manager() # Default all tickets
-    open_tickets = OpenTickets() # Send only open tickets
-
-    class Meta:
-      ordering = ('-created_at',)
+    objects = models.Manager() # Default all tickets
+    ticketobjects = OpenTickets() # Send only open tickets
 
     def __str__(self):
       return self.title
