@@ -1,9 +1,8 @@
 from django.urls import path
-from . import views
+from django.views.generic import TemplateView
+
+app_name = 'tickets'
 
 urlpatterns = [
-    path('', views.ListTickets.as_view()),
-    path('create/', views.CreateTicket.as_view()),
-    path('<int:pk>/', views.UpdateTicket.as_view()),
-    path('<int:pk>/delete/', views.DeleteTicket.as_view()),
+    path('', TemplateView.as_view(template_name="blog/index.html")),
 ]
