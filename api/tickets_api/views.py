@@ -15,12 +15,17 @@ class TicketUserPermission(BasePermission):
       return obj.created_by == request.user
 
 
-class TicketList(generics.ListCreateAPIView, TicketUserPermission):
+class TicketList(generics.ListAPIView, TicketUserPermission):
   permission_classes = [IsAdminUser]
   queryset = Ticket.objects.all()
   serializer_class = TicketSerializer
 
 class TicketDetails(generics.RetrieveUpdateDestroyAPIView, TicketUserPermission):
   permission_classes = [TicketUserPermission]
+  queryset = Ticket.objects.all()
+  serializer_class = TicketSerializer
+
+class TicketCreate(generics.CreateAPIView, TicketUserPermission):
+  permission_classes = [IsAuthenticated]
   queryset = Ticket.objects.all()
   serializer_class = TicketSerializer
