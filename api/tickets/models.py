@@ -1,5 +1,6 @@
-from django.contrib.auth.models import User
+# from django.contrib.auth.models import User
 from django.db import models
+from django.conf import settings
 
 
 class Priority(models.Model):
@@ -19,7 +20,7 @@ class Ticket(models.Model):
       ('closed', 'Closed')
     )
 
-    created_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='tickets')
+    created_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='tickets')
     created_at = models.DateTimeField(auto_now_add=True, null=False)
     title = models.CharField(max_length=255)
     description = models.TextField()
