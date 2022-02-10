@@ -14,6 +14,7 @@ export default function Login() {
     }).then((res) => {
       localStorage.setItem('access_token', res.data.access)
       localStorage.setItem('refresh_token', res.data.refresh)
+      Client.defaults.headers['Authorization'] = 'JWT ' + localStorage.getItem('access_token')
       router.push('/')
     })
   }
@@ -21,11 +22,11 @@ export default function Login() {
 
   return (
     <>
-      <h1>Register</h1>
+      <h1>Log In</h1>
       <div>
         <form onSubmit={handleSubmit}>
           <label htmlFor="email">Email</label>
-          <input type="text" name="email" required />
+          <input type="email" name="email" required />
           <label htmlFor="password">Password</label>
           <input type="password" name="password" required />
           <button type="submit">Login</button>
