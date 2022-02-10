@@ -1,11 +1,6 @@
 from django.urls import path
 from .views import TicketList, TicketDetails, TicketCreate
 
-# from rest_framework_simplejwt.views import (
-#     TokenObtainPairView,
-#     TokenRefreshView,
-# )
-
 app_name = 'tickets_api'
 
 urlpatterns = [
