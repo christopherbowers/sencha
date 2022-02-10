@@ -2,7 +2,7 @@ from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework import status, generics
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from .serializers import CustomUserSerializer, AppUserSerializer
+from .serializers import CustomUserSerializer, AppUserSerializer, AppUserTicketsSerializer
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.permissions import AllowAny, BasePermission
 from .models import AppUser
@@ -40,13 +40,19 @@ class AppUserPermission(BasePermission):
 
   def has_object_permission(self, request, view, obj):
 
-    if request.user != obj.id:
-      return True
+    if request.user.id != obj.id:
+      return False
     else:
-      return obj.id == request.user
+      return obj.id == request.user.id
 
 
 class UserDetails(generics.RetrieveUpdateDestroyAPIView, AppUserPermission):
   permission_classes = [AppUserPermission]
   queryset = AppUser.objects.all()
   serializer_class = AppUserSerializer
+
+
+class UserTickets(generics.RetrieveUpdateDestroyAPIView, AppUserPermission):
+  permission_classes = [AppUserPermission]
+  queryset = AppUser.objects.all()
+  serializer_class = AppUserTicketsSerializer
