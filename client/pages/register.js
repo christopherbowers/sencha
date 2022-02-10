@@ -37,7 +37,6 @@ export default function Register() {
         password: formData.password,
       })
       .then((res) => {
-        console.log(res.data)
         router.push('/login')
       })
   }
