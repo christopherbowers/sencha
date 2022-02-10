@@ -1,5 +1,5 @@
-import Sidebar from './Sidebar'
-import Footer from './Footer'
+import Sidebar from './sidebar'
+import Footer from './footer'
 
 export default function Layout({ children }) {
   return (
