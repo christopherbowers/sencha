@@ -1,10 +1,11 @@
 from rest_framework_simplejwt.views import TokenObtainPairView
-from rest_framework import status
+from rest_framework import status, generics
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from .serializers import CustomUserSerializer
+from .serializers import CustomUserSerializer, AppUserSerializer
 from rest_framework_simplejwt.tokens import RefreshToken
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import AllowAny, BasePermission
+from .models import AppUser
 
 
 class CreateUser(APIView):
@@ -32,3 +33,20 @@ class BlacklistTokenUpdateView(APIView):
         return Response(status=status.HTTP_205_RESET_CONTENT)
       except Exception as e:
           return Response(status=status.HTTP_400_BAD_REQUEST)
+
+
+class AppUserPermission(BasePermission):
+  message = 'Restricted to the user only.'
+
+  def has_object_permission(self, request, view, obj):
+
+    if request.user != obj.id:
+      return True
+    else:
+      return obj.id == request.user
+
+
+class UserDetails(generics.RetrieveUpdateDestroyAPIView, AppUserPermission):
+  permission_classes = [AppUserPermission]
+  queryset = AppUser.objects.all()
+  serializer_class = AppUserSerializer

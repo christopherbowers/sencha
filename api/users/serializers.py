@@ -20,3 +20,9 @@ class CustomUserSerializer(serializers.ModelSerializer):
         instance.set_password(password)
       instance.save()
       return instance
+
+
+class AppUserSerializer(serializers.ModelSerializer):
+  class Meta:
+    model = AppUser
+    fields = ('id', 'last_login', 'is_superuser', 'email', 'user_name', 'first_name', 'last_name', 'date_joined')
