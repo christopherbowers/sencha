@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router'
 import Link from 'next/link'
-import axios from 'axios'
+import Client from '../services/api'
 
 export default function Login() {
   const router = useRouter()
@@ -8,7 +8,7 @@ export default function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault()
 
-    await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/token/`, {
+    await Client.post(`${process.env.NEXT_PUBLIC_API_URL}/token/`, {
       email: e.target.email.value,
       password:  e.target.password.value
     }).then((res) => {
@@ -24,9 +24,9 @@ export default function Login() {
       <h1>Register</h1>
       <div>
         <form onSubmit={handleSubmit}>
-          <lable htmlFor="email">Email</lable>
+          <label htmlFor="email">Email</label>
           <input type="text" name="email" required />
-          <lable htmlFor="password">Password</lable>
+          <label htmlFor="password">Password</label>
           <input type="password" name="password" required />
           <button type="submit">Login</button>
         </form>
