@@ -26,3 +26,10 @@ class AppUserSerializer(serializers.ModelSerializer):
   class Meta:
     model = AppUser
     fields = ('id', 'last_login', 'is_superuser', 'email', 'user_name', 'first_name', 'last_name', 'date_joined')
+
+
+class AppUserTicketsSerializer(serializers.ModelSerializer):
+  class Meta:
+    model = AppUser
+    fields = ('tickets',)
+    depth=1
