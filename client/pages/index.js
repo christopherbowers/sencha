@@ -8,8 +8,12 @@ export default function Home() {
   const global = useContext(GlobalContext)
 
     const getUser = async () => {
-      // const token = localStorage.access_token
-      await Client.get(`/users/me/`)
+      const token = localStorage.access_token
+      await Client.get(`/users/me/`, {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        })
         .then((res) => {
           global.update({
             id: res.data.id,

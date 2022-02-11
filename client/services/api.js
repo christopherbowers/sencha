@@ -7,20 +7,6 @@ const Client = Axios.create({
   timeout: 5000
 })
 
-Client.interceptors.request.use(
-  (config) => {
-    // Reads the token in localstorage
-    const token = localStorage.access_token
-    // if the token exists, we set the authorization header
-    if (token) {
-        config.headers['authorization'] = `Bearer ${token}`
-    }
-    return config // We return the new config if the token exists or the default config if no token exists.
-    // Provides the token to each request that passes through axios
-  },
-  (error) => Promise.reject(error)
-)
-
 Client.interceptors.response.use(
   (response) => {
     return response;
@@ -29,11 +15,6 @@ Client.interceptors.response.use(
     const originalRequest = error.config;
 
     if (typeof error.response === 'undefined') {
-      alert(
-        'A server/network error occurred. ' +
-          'Looks like CORS might be the problem. ' +
-          'Sorry about this - we will get it fixed shortly.'
-      );
       return Promise.reject(error);
     }
 

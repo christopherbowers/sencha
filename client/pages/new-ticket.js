@@ -26,7 +26,12 @@ export default function NewTicket() {
   const handleSubmit = async (e) => {
     e.preventDefault()
 
+    const token = localStorage.access_token
+    console.log(token)
     await Client.post(`/tickets/create/`, {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      },
       created_by: global.id,
       title: formData.title,
       description: formData.description,
@@ -34,10 +39,9 @@ export default function NewTicket() {
       status: 'open',
     })
       .then((res) => alert('Ticket Added'))
-      .catch(error => window.alert('There was an error'))
+      .catch(error => alert('There was an error'))
   }
 
-  console.log(localStorage.access_token)
 
   return (
     <>
