@@ -4,11 +4,7 @@ const baseURL = process.env.NEXT_PUBLIC_API_URL
 
 const Client = Axios.create({
   baseURL: baseURL,
-  timeout: 5000,
-  // headers: { 'Authorization': localStorage.getItem('access_token') ? 'JWT ' + localStorage.getItem('access_token') : null,
-  //   'Content-Type': 'application/json',
-  //   'accept': 'application/json',
-  // },
+  timeout: 5000
 })
 
 
@@ -48,7 +44,6 @@ Client.interceptors.response.use(
 
         // exp date in token is expressed in seconds, while now() returns milliseconds:
         const now = Math.ceil(Date.now() / 1000);
-        console.log(tokenParts.exp);
 
         if (tokenParts.exp > now) {
           return Client
@@ -58,9 +53,9 @@ Client.interceptors.response.use(
               localStorage.setItem('refresh_token', response.data.refresh);
 
               Client.defaults.headers['Authorization'] =
-                'JWT ' + response.data.access;
+                'Bearer ' + response.data.access;
               originalRequest.headers['Authorization'] =
-                'JWT ' + response.data.access;
+                'Bearer ' + response.data.access;
 
               return Client(originalRequest);
             })

@@ -14,7 +14,7 @@ export default function Login() {
     }).then((res) => {
       localStorage.setItem('access_token', res.data.access)
       localStorage.setItem('refresh_token', res.data.refresh)
-      Client.defaults.headers['Authorization'] = 'JWT ' + localStorage.getItem('access_token')
+      Client.defaults.headers['Authorization'] = 'Bearer ' + localStorage.getItem('access_token')
       router.push('/')
     })
   }
