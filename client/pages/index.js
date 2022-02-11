@@ -8,12 +8,8 @@ export default function Home() {
   const global = useContext(GlobalContext)
 
     const getUser = async () => {
-      const token = localStorage.access_token
-      await Client.get(`/users/me/`, {
-        headers: {
-          'Authorization': `Bearer ${token}`
-        }
-      })
+      // const token = localStorage.access_token
+      await Client.get(`/users/me/`)
         .then((res) => {
           global.update({
             id: res.data.id,
@@ -22,6 +18,7 @@ export default function Home() {
             lastName: res.data.last_name,
             email: res.data.email,
           })
+          // console.log(res)
         })
     }
 
@@ -30,9 +27,9 @@ export default function Home() {
       const token = localStorage.access_token
       if (token) {
         getUser()
-        console.log(global)
       }
     },[])
+        // console.log(global)
 
 
 
