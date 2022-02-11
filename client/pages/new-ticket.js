@@ -27,7 +27,6 @@ export default function NewTicket() {
     e.preventDefault()
 
     const token = localStorage.access_token
-    console.log(token)
     await Client.post(`/tickets/create/`, {
       headers: {
         'Authorization': `Bearer ${token}`

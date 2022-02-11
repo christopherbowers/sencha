@@ -21,6 +21,9 @@ export default function Sidebar() {
         <Link href="/new-ticket">
           <a>New Ticket</a>
         </Link>
+        <Link href="/tickets">
+          <a>Tickets</a>
+        </Link>
         <Link href="/">
           <a>Home</a>
         </Link>
