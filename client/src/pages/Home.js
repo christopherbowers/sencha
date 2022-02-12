@@ -1,6 +1,7 @@
-import { useContext, useEffect } from 'react'
+import { lazy, useContext, useEffect } from 'react'
 import UserContext from '../context/UserContext'
 import Client from '../services/api'
+const Tickets = lazy(() => import('../components/Tickets'))
 
 export default function Home() {
 
@@ -39,8 +40,9 @@ export default function Home() {
     <div className="container">
       <main className="main">
         <h1 className="title">
-          👋 Welcome {global.firstName}
+          👋 Welcome { global.firstName }
         </h1>
+        <Tickets id={ global.id }/ >
       </main>
     </div>
   )

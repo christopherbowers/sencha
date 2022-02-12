@@ -1,4 +1,5 @@
 import { useContext, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import Client from '../services/api'
 import UserContext from '../context/UserContext'
 
@@ -6,14 +7,7 @@ import UserContext from '../context/UserContext'
 export default function NewTicket() {
 
   const global = useContext(UserContext)
-
-//   const initialFormData = {
-//     title: '',
-//     description: '',
-//     priority: 1
-//   }
-//
-//   const [formData, setFormData] = useState(initialFormData)
+  const navigate = useNavigate()
   const [priority, setPriority] = useState(1)
   const handleChange = (e) => {
     setPriority({[e.target.name]: e.target.value})
@@ -21,9 +15,6 @@ export default function NewTicket() {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-
-    // const token = localStorage.access_token
-
     await Client.post(`/tickets/create/`, {
       created_by: global.id,
       title: e.target.title.value,
@@ -31,8 +22,7 @@ export default function NewTicket() {
       priority: priority,
       status: 'open',
     })
-      // .then((res) => alert('Ticket Added'))
-      .then((res) => res)
+      .then((res) => navigate('/'))
       .catch(error => alert('There was an error'))
   }
 

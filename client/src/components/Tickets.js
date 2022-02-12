@@ -1,19 +1,17 @@
 import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import Client from '../services/api'
 // import UserContext from '../context/UserContext'
 import styled from 'styled-components'
 
-export default function Tickets() {
+export default function Tickets({id}) {
 
+  const navigate = useNavigate()
   const token = localStorage.access_token
   const [tickets, setTickets] = useState([])
   const [loading, setLoading] = useState(true)
 
-
   const getTickets = async () => {
-    const id = localStorage.id
-
     await Client.get(`/users/${id}/tickets/`, {
       headers: {
         'Authorization': `Bearer ${token}`
@@ -25,7 +23,7 @@ export default function Tickets() {
   }
 
   useEffect(() => {
-    if (token) {
+    if (id) {
       getTickets()
     }
   },[])
@@ -37,22 +35,21 @@ export default function Tickets() {
   }
 
   return (
-    <><h1>Tickets</h1>
+    <>
+      {tickets.map(ticket => {
 
-    {tickets.map(ticket => {
+        const { id, title, priority } = ticket
 
-      const { id, title, priority } = ticket
+        return (
+        <Wrapper key={id} onClick={() => navigate(`/tickets/${ id }`)}>
+          <Link to={(`/tickets/${ id }`)}>ID: { id }</Link>
+          <p><strong>Title:</strong> { title }</p>
+          <p className={priority.name}>Priority: { priority.name }</p>
+{/*           <Link to={(`/tickets/${ id }`)}>View</Link> */}
+        </Wrapper>
+        )
 
-      return (
-      <Wrapper key={id}>
-        <Link to={(`/tickets/${ id }`)}>ID: { id }</Link>
-        <p><strong>Title:</strong> { title }</p>
-        <p className={priority.name}>Priority: { priority.name }</p>
-        <Link to={(`/tickets/${ id }`)}>View</Link>
-      </Wrapper>
-      )
-
-    })}
+      })}
     </>
   )
 }
@@ -67,8 +64,12 @@ const Wrapper = styled.div`
   flex-flow: row nowrap;
   align-items: baseline;
   justify-content: space-around;
+  transition: all .2s;
+  cursor: pointer;
 
-  // p { margin-right: 10px;
+  &:hover {
+    background-color: lightgray;
+  }
 
   .Normal {
     color: orange;
