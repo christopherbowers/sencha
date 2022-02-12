@@ -14,5 +14,6 @@ class TicketSerializer(serializers.ModelSerializer):
         'title',
         'description',
         'priority',
+        'created_at',
         'status',
       )
