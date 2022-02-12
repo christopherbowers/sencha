@@ -9,6 +9,7 @@ const Login = lazy(() => import('./pages/Login'))
 const Register = lazy(() => import('./pages/Register'))
 const NewTicket = lazy(() => import('./components/NewTicket'))
 const Tickets = lazy(() => import('./pages/Tickets'))
+const TicketDetails = lazy(() => import('./pages/TicketDetails'))
 
 
 
@@ -36,6 +37,7 @@ function update(data) {
           <Route path="/" element={ <Home /> } />
           <Route path="/new-ticket" element={ <NewTicket /> } />
           <Route path="/tickets" element={ <Tickets /> } />
+          <Route path="/tickets/:id" element={ <TicketDetails /> } />
         </Route>
 
 
