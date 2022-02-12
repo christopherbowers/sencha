@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import Client from '../services/api'
 import DeleteTicket from '../components/DeleteTicket'
 
 export default function TicketDetail() {
-
+  const navigate = useNavigate()
   const { id } = useParams()
 
   const [ticket, setTicket] = useState({})
@@ -30,6 +30,9 @@ export default function TicketDetail() {
     <p>{ ticket.priority }</p>
     <p>{ ticket.description }</p>
     <p>{ ticket.created_at }</p>
+    <button onClick={() => navigate(`/tickets/${ id }/edit`)}>
+      Edit
+    </button>
     <DeleteTicket id={ id } />
     </>
   )

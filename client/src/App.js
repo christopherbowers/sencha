@@ -8,8 +8,8 @@ const Home = lazy(() => import('./pages/Home'))
 const Login = lazy(() => import('./pages/Login'))
 const Register = lazy(() => import('./pages/Register'))
 const NewTicket = lazy(() => import('./components/NewTicket'))
-const Tickets = lazy(() => import('./pages/Tickets'))
 const TicketDetails = lazy(() => import('./pages/TicketDetails'))
+const EditTicket = lazy(() => import('./components/EditTicket'))
 
 
 
@@ -36,8 +36,8 @@ function update(data) {
         <Route path="/" element={ <LayoutWithNav /> } >
           <Route path="/" element={ <Home /> } />
           <Route path="/new-ticket" element={ <NewTicket /> } />
-          <Route path="/tickets" element={ <Tickets /> } />
           <Route path="/tickets/:id" element={ <TicketDetails /> } />
+          <Route path="/tickets/:id/edit" element={ <EditTicket /> } />
         </Route>
 
 

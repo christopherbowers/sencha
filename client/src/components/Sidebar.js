@@ -14,6 +14,7 @@ export default function Sidebar() {
     navigate('/login')
   }
 
+  const token = localStorage.access_token
 
   return (
     <section>
@@ -21,18 +22,18 @@ export default function Sidebar() {
         <Link to="/new-ticket">
           New Ticket
         </Link>
-        <Link to="/tickets">
-          Tickets
-        </Link>
         <Link to="/">
-          Home
+          Dashboard
         </Link>
+        { !token ?
         <Link to="/login">
           Login
         </Link>
+        :
         <Link to="#" onClick={logout}>
           Logout
         </Link>
+        }
       </Nav>
     </section>
   )
