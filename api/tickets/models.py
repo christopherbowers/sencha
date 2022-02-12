@@ -24,7 +24,7 @@ class Ticket(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, null=False)
     title = models.CharField(max_length=255)
     description = models.TextField()
-    priority = models.ForeignKey(Priority, on_delete=models.PROTECT, default=1)
+    priority = models.ForeignKey(Priority, on_delete=models.PROTECT, default=1, related_name='priority')
     status = models.CharField(max_length=10, choices=status_options, default='open')
     closed_at = models.DateTimeField(null=True, blank=True)
 
