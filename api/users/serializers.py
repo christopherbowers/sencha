@@ -29,7 +29,8 @@ class AppUserSerializer(serializers.ModelSerializer):
 
 
 class AppUserTicketsSerializer(serializers.ModelSerializer):
+
   class Meta:
     model = AppUser
     fields = ('tickets',)
-    depth=1
+    depth=2
