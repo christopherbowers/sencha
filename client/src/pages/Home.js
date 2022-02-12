@@ -1,11 +1,10 @@
-import Head from 'next/head'
 import { useContext, useEffect } from 'react'
-import GlobalContext from '../utils/global-context'
+import UserContext from '../context/UserContext'
 import Client from '../services/api'
 
 export default function Home() {
 
-  const global = useContext(GlobalContext)
+  const global = useContext(UserContext)
 
     const getUser = async () => {
       const token = localStorage.access_token
@@ -22,7 +21,7 @@ export default function Home() {
             lastName: res.data.last_name,
             email: res.data.email,
           })
-          // console.log(res)
+          localStorage.setItem('id', res.data.id)
         })
     }
 
@@ -33,17 +32,11 @@ export default function Home() {
         getUser()
       }
     },[])
-        // console.log(global)
 
 
 
   return (
     <div className="container">
-      <Head>
-        <title>Sencha</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
       <main className="main">
         <h1 className="title">
           👋 Welcome {global.firstName}

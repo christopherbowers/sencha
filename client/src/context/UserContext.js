@@ -1,6 +1,6 @@
 import React from 'react'
 
-const GlobalContext = React.createContext({
+const UserContext = React.createContext({
   id: null,
   userName: '',
   firstName: '',
@@ -9,4 +9,4 @@ const GlobalContext = React.createContext({
   update: (data) => {}
 })
 
-export default GlobalContext
+export default UserContext

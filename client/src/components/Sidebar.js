@@ -1,10 +1,9 @@
-import Link from 'next/link'
+import { Link, useNavigate } from 'react-router-dom'
 import Client from '../services/api'
-import { useRouter } from 'next/router'
 import styled from 'styled-components'
 
 export default function Sidebar() {
-  const router = useRouter()
+  const navigate = useNavigate()
 
   const logout = async () => {
     await Client.post('/users/logout/blacklist/', {
@@ -12,26 +11,27 @@ export default function Sidebar() {
     })
     localStorage.clear()
     Client.defaults.headers['Authorization'] = null
-    router.push('/login')
+    navigate('/login')
   }
+
 
   return (
     <section>
       <Nav>
-        <Link href="/new-ticket">
-          <a>New Ticket</a>
+        <Link to="/new-ticket">
+          New Ticket
         </Link>
-        <Link href="/tickets">
-          <a>Tickets</a>
+        <Link to="/tickets">
+          Tickets
         </Link>
-        <Link href="/">
-          <a>Home</a>
+        <Link to="/">
+          Home
         </Link>
-        <Link href="/login">
-          <a>Login</a>
+        <Link to="/login">
+          Login
         </Link>
-        <Link href="#" >
-          <a onClick={logout}>Logout</a>
+        <Link to="#" onClick={logout}>
+          Logout
         </Link>
       </Nav>
     </section>
@@ -44,7 +44,9 @@ const Nav = styled.nav`
   padding-top: 10px;
   margin: 10px;
 
+
   a {
+    color: hsl(122, 64%, 30%);
     background-color: hsl(122, 64%, 77%);
     padding: 6px 10px;
     margin: 0 10px;
@@ -52,6 +54,7 @@ const Nav = styled.nav`
     border: 3px solid transparent;
     transition: all .3s;
     transition-timing-function: ease-in-out;
+    text-decoration: none;
   }
 
   a:hover {
