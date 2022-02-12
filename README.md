@@ -19,10 +19,10 @@ Christopher Bowers | [LinkedIn](https://linkedin.com/in/christopher-bowers-dev)
 
 Technologies used in this project.
 
-- Next.js
+- React
 - Django
+- JWT Authentication
 - postgreSQL
-- GraphyQL
 - styled-components
 
 
@@ -33,6 +33,7 @@ Technologies used in this project.
 
 ## 🚀 Deployed Site
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/be9b96c4-ebdd-46eb-973b-9eaef57a4e76/deploy-status)](https://app.netlify.com/sites/sencha-app/deploys) ![Heroku](https://pyheroku-badge.herokuapp.com/?app=senchaapi)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/1b5e2551-66b2-46ea-b65f-d4f5fbf55cff/deploy-status)](https://app.netlify.com/sites/sencha-app/deploys)
+ ![Heroku](https://pyheroku-badge.herokuapp.com/?app=senchaapi)
 
 🔗 <http://sencha-app.netlify.app>
