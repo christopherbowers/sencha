@@ -1,11 +1,10 @@
 import { useState } from 'react'
-import { useRouter } from 'next/router'
-import Link from 'next/link'
+import { Link, useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 import Client from '../services/api'
 
 export default function Register() {
-  const router = useRouter()
+  const navigate = useNavigate()
 
   const initialFormData = Object.freeze({
     email: '',
@@ -37,7 +36,7 @@ export default function Register() {
         password: formData.password,
       })
       .then((res) => {
-        router.push('/login')
+        navigate('/login')
       })
   }
 
@@ -64,8 +63,8 @@ export default function Register() {
         </form>
       </FormWrapper>
       <div>
-        <Link href='login'>
-          <a>Already have an account? Log in.</a>
+        <Link to='login'>
+          Already have an account? Log in.
         </Link>
       </div>
     </>

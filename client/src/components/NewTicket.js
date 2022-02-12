@@ -1,44 +1,38 @@
 import { useContext, useState } from 'react'
 import Client from '../services/api'
-import GlobalContext from '../utils/global-context'
+import UserContext from '../context/UserContext'
 
 
 export default function NewTicket() {
 
-  const global = useContext(GlobalContext)
+  const global = useContext(UserContext)
 
-  const initialFormData = {
-    title: '',
-    description: '',
-    priority: 1
-  }
-
-  const [formData, setFormData] = useState(initialFormData)
-
+//   const initialFormData = {
+//     title: '',
+//     description: '',
+//     priority: 1
+//   }
+//
+//   const [formData, setFormData] = useState(initialFormData)
+  const [priority, setPriority] = useState(1)
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      // Trimming any whitespace
-      [e.target.name]: e.target.value.trim(),
-    })
+    setPriority({[e.target.name]: e.target.value})
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
 
-    const token = localStorage.access_token
-    console.log(token)
+    // const token = localStorage.access_token
+
     await Client.post(`/tickets/create/`, {
-      headers: {
-        'Authorization': `Bearer ${token}`
-      },
       created_by: global.id,
-      title: formData.title,
-      description: formData.description,
-      priority: formData.priority,
+      title: e.target.title.value,
+      description: e.target.description.value,
+      priority: priority,
       status: 'open',
     })
-      .then((res) => alert('Ticket Added'))
+      // .then((res) => alert('Ticket Added'))
+      .then((res) => res)
       .catch(error => alert('There was an error'))
   }
 
@@ -49,10 +43,10 @@ export default function NewTicket() {
 
       <form onSubmit={handleSubmit}>
         <label htmlFor='title'>Title</label>
-        <input type='text' name='title' required onChange={handleChange} />
+        <input type='text' name='title' required />
 
         <label htmlFor='description'>Description</label>
-        <textarea type='text' name='description' required onChange={handleChange} />
+        <textarea type='text' name='description' required />
 
         <label htmlFor="priority">Priority:</label>
         <select name="priority" onChange={handleChange}>
