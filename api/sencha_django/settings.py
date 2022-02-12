@@ -2,6 +2,7 @@ import os
 import dj_database_url
 from pathlib import Path
 from datetime import timedelta
+from django.conf import settings
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -22,44 +23,67 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'tickets',
-    'tickets_api',
-    'rest_framework',
-    'corsheaders',
+  'django.contrib.admin',
+  'django.contrib.auth',
+  'django.contrib.contenttypes',
+  'django.contrib.sessions',
+  'django.contrib.messages',
+  'django.contrib.staticfiles',
+  'tickets',
+  'tickets_api',
+  'users',
+  'rest_framework',
+  'corsheaders',
+  'rest_framework_simplejwt.token_blacklist',
+  'djoser',
 ]
 
 MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+  'django.middleware.security.SecurityMiddleware',
+  'whitenoise.middleware.WhiteNoiseMiddleware',
+  'django.contrib.sessions.middleware.SessionMiddleware',
+  'corsheaders.middleware.CorsMiddleware',
+  'django.middleware.common.CommonMiddleware',
+  'django.middleware.csrf.CsrfViewMiddleware',
+  'django.contrib.auth.middleware.AuthenticationMiddleware',
+  'django.contrib.messages.middleware.MessageMiddleware',
+  'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
 
 CORS_ALLOWED_ORIGINS = [
   'http://localhost:3000',
-  'https://senchaapi.herokuapp.com'
+  'https://sencha-app.netlify.app'
 ]
+
 
 REST_FRAMEWORK = {
   'DEFAULT_PERMISSION_CLASSES': [
     'rest_framework.permissions.IsAuthenticated',
     # 'rest_framework.permissions.AllowAny',
-  ]
+  ],
+  'DEFAULT_AUTHENTICATION_CLASSES': (
+      'rest_framework_simplejwt.authentication.JWTAuthentication',
+  )
 }
 
 
+SIMPLE_JWT = {
+  'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),
+  'REFRESH_TOKEN_LIFETIME': timedelta(days=10),
+  'ROTATE_REFRESH_TOKENS': True,
+  'BLACKLIST_AFTER_ROTATION': True,
+  'ALGORITHM': 'HS256',
+  'SIGNING_KEY': settings.SECRET_KEY,
+  'VERIFYING_KEY': None,
+  'AUTH_HEADER_TYPES': ('Bearer',),
+  'USER_ID_FIELD': 'id',
+  'USER_ID_CLAIM': 'user_id',
+  'AUTH_TOKEN_CLASSES': ('rest_framework_simplejwt.tokens.AccessToken',),
+  'TOKEN_TYPE_CLAIM': 'token_type',
+}
+
+AUTH_USER_MODEL = 'users.AppUser'
 
 ROOT_URLCONF = 'sencha_django.urls'
 
@@ -122,6 +146,8 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
+
+STATIC_ROOT=os.path.join(BASE_DIR, "static/")
 
 STATIC_URL = 'static/'
 
