@@ -53,7 +53,7 @@ MIDDLEWARE = [
 
 CORS_ALLOWED_ORIGINS = [
   'http://localhost:3000',
-  'https://sencha-app.netlify.app/'
+  'https://sencha-app.netlify.app'
 ]
 
 
