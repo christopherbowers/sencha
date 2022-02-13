@@ -6,6 +6,7 @@ const UserContext = React.createContext({
   firstName: '',
   lastName: '',
   email: '',
+  is_superuser: false,
   update: (data) => {}
 })
 
