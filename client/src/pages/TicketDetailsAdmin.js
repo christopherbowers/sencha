@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import Client from '../services/api'
 import DeleteTicket from '../components/DeleteTicket'
+import CloseTicket from '../components/CloseTicket'
 
 export default function TicketDetail() {
   const navigate = useNavigate()
@@ -10,7 +11,7 @@ export default function TicketDetail() {
   const [ticket, setTicket] = useState({})
 
   const getTicketDetails = async () =>  {
-    await Client.get(`/tickets/admin/${ id }`)
+    await Client.get(`/tickets/admin/${ id }/`)
       .then((res) => {
         setTicket(res.data)
       })
@@ -29,10 +30,12 @@ export default function TicketDetail() {
     <p>{ ticket.priority }</p>
     <p>{ ticket.description }</p>
     <p>Created On: { createdOn }</p>
+    <p>{ ticket.status }</p>
     <button onClick={() => navigate(`/tickets/${ id }/edit`)}>
       Edit
     </button>
     <DeleteTicket id={ id } />
+    <CloseTicket id={ id } getTicketDetails={getTicketDetails}/>
     </>
   )
 }
