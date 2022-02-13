@@ -5,44 +5,43 @@ const Tickets = lazy(() => import('../components/Tickets'))
 
 export default function Home() {
 
-  const global = useContext(UserContext)
+  const user = useContext(UserContext)
 
-    const getUser = async () => {
-      const token = localStorage.access_token
-      await Client.get(`/users/me/`, {
-          headers: {
-            'Authorization': `Bearer ${token}`
-          }
+  const getUser = async () => {
+    const token = localStorage.access_token
+    await Client.get(`/users/${user.id}`, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      })
+      .then((res) => {
+        console.log(res.data)
+        user.update({
+          id: res.data.id,
+          userName: res.data.user_name,
+          firstName: res.data.first_name,
+          lastName: res.data.last_name,
+          email: res.data.email,
+          is_superuser: res.data.is_superuser
         })
-        .then((res) => {
-          global.update({
-            id: res.data.id,
-            userName: res.data.user_name,
-            firstName: res.data.first_name,
-            lastName: res.data.last_name,
-            email: res.data.email,
-          })
-          localStorage.setItem('id', res.data.id)
-        })
+      })
+  }
+
+
+  useEffect(() => {
+    if (user.id) {
+      getUser()
     }
-
-
-    useEffect(() => {
-      const token = localStorage.access_token
-      if (token) {
-        getUser()
-      }
-    },[])
-
+  },[])
 
 
   return (
     <div className="container">
       <main className="main">
         <h1 className="title">
-          👋 Welcome { global.firstName }
+          👋 Welcome { user.firstName }
         </h1>
-        <Tickets id={ global.id }/ >
+        <Tickets id={ user.id }/ >
       </main>
     </div>
   )
