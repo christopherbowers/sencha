@@ -11,21 +11,21 @@ export default function Home() {
   const getUser = async () => {
     const token = localStorage.access_token
     await Client.get(`/users/${user.id}`, {
-        headers: {
-          'Authorization': `Bearer ${token}`
-        }
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    })
+    .then((res) => {
+      console.log(res.data)
+      user.update({
+        id: res.data.id,
+        userName: res.data.user_name,
+        firstName: res.data.first_name,
+        lastName: res.data.last_name,
+        email: res.data.email,
+        is_superuser: res.data.is_superuser
       })
-      .then((res) => {
-        console.log(res.data)
-        user.update({
-          id: res.data.id,
-          userName: res.data.user_name,
-          firstName: res.data.first_name,
-          lastName: res.data.last_name,
-          email: res.data.email,
-          is_superuser: res.data.is_superuser
-        })
-      })
+    })
   }
 
 

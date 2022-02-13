@@ -1,13 +1,13 @@
-import { useEffect, useState, useContext } from 'react'
+import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import Client from '../services/api'
-import UserContext from '../context/UserContext'
+
 import styled from 'styled-components'
 
 export default function Tickets({id}) {
 
   const navigate = useNavigate()
-  const global = useContext(UserContext)
+
   const [tickets, setTickets] = useState([])
   const [loading, setLoading] = useState(true)
 

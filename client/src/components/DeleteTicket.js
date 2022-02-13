@@ -10,8 +10,6 @@ export default function DeleteTicket({ id }) {
       .then(navigate('/tickets'))
   }
 
-
-
   return (
     <button onClick={ deleteTicket }>Delete</button>
   )
