@@ -10,15 +10,14 @@ export default function TicketDetail() {
   const [ticket, setTicket] = useState({})
 
   const getTicketDetails = async () =>  {
-
     await Client.get(`/tickets/${ id }`)
       .then((res) => {
         setTicket(res.data)
-        console.log(res.data)
       })
-
   }
 
+  const timestamp = Date.parse(ticket.created_at)
+  const createdOn = new Date(timestamp).toLocaleDateString('en-us', { weekday:'long', year:'numeric', month:'long', day:'numeric'})
 
   useEffect(() => {
     getTicketDetails()
@@ -29,7 +28,7 @@ export default function TicketDetail() {
     <h1>{ ticket.title }</h1>
     <p>{ ticket.priority }</p>
     <p>{ ticket.description }</p>
-    <p>{ ticket.created_at }</p>
+    <p>Created On: { createdOn }</p>
     <button onClick={() => navigate(`/tickets/${ id }/edit`)}>
       Edit
     </button>

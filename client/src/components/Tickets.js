@@ -1,20 +1,20 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useContext } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import Client from '../services/api'
-// import UserContext from '../context/UserContext'
+import UserContext from '../context/UserContext'
 import styled from 'styled-components'
 
 export default function Tickets({id}) {
 
   const navigate = useNavigate()
-  const token = localStorage.access_token
+  const global = useContext(UserContext)
   const [tickets, setTickets] = useState([])
   const [loading, setLoading] = useState(true)
 
   const getTickets = async () => {
     await Client.get(`/users/${id}/tickets/`, {
       headers: {
-        'Authorization': `Bearer ${token}`
+        'Authorization': `Bearer ${global.token}`
       }
     }).then((res) => {
       setTickets(res.data.tickets)
@@ -26,8 +26,7 @@ export default function Tickets({id}) {
     if (id) {
       getTickets()
     }
-  },[])
-
+  },[id])
 
 
   if (loading) {
@@ -37,18 +36,15 @@ export default function Tickets({id}) {
   return (
     <>
       {tickets.map(ticket => {
-
-        const { id, title, priority } = ticket
-
+        const { id, title, priority, status } = ticket
         return (
         <Wrapper key={id} onClick={() => navigate(`/tickets/${ id }`)}>
           <Link to={(`/tickets/${ id }`)}>ID: { id }</Link>
           <p><strong>Title:</strong> { title }</p>
-          <p className={priority.name}>Priority: { priority.name }</p>
-{/*           <Link to={(`/tickets/${ id }`)}>View</Link> */}
+          <p className={priority.name}>{ priority.name }</p>
+          <p className="status">{ status }</p>
         </Wrapper>
         )
-
       })}
     </>
   )
@@ -57,7 +53,7 @@ export default function Tickets({id}) {
 
 const Wrapper = styled.div`
   border: 1px solid black;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 
   text-align: left;
   display: flex;
@@ -72,13 +68,23 @@ const Wrapper = styled.div`
   }
 
   .Normal {
-    color: orange;
+    color: hsl(52, 100%, 20%);
+    background-color: hsl(52, 100%, 70%);
   }
   .High {
-    color: red;
+    color: hsl(0, 100%, 10%);
+    background-color: hsl(0, 100%, 65%);
   }
   .Low {
-    color: green;
+    color: hsl(123, 100%, 10%);
+    background-color: hsl(123, 50%, 50%);
+  }
+
+  .Normal,
+  .High,
+  .Low {
+   padding: 8px 12px 6px 12px;
+   border-radius: 16px;
   }
 `
 
