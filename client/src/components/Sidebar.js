@@ -1,20 +1,8 @@
-import { Link, useNavigate } from 'react-router-dom'
-import Client from '../services/api'
+import { Link } from 'react-router-dom'
+import Logout from './Logout'
 import styled from 'styled-components'
 
 export default function Sidebar() {
-  const navigate = useNavigate()
-
-  const logout = async () => {
-    await Client.post('/users/logout/blacklist/', {
-      refresh_token: localStorage.getItem('refresh_token'),
-    })
-    localStorage.clear()
-    Client.defaults.headers['Authorization'] = null
-    navigate('/login')
-  }
-
-  const token = localStorage.access_token
 
   return (
     <section>
@@ -25,15 +13,7 @@ export default function Sidebar() {
         <Link to="/">
           Dashboard
         </Link>
-        { !token ?
-        <Link to="/login">
-          Login
-        </Link>
-        :
-        <Link to="#" onClick={logout}>
-          Logout
-        </Link>
-        }
+        <Logout />
       </Nav>
     </section>
   )

@@ -1,5 +1,3 @@
-const token = localStorage.access_token
-
 export default function parseJwt(token) {
   try {
     return JSON.parse(atob(token.split('.')[1]));

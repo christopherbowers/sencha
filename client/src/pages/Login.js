@@ -1,9 +1,13 @@
-import { Link } from 'react-router-dom'
-import { useNavigate } from 'react-router-dom'
+import { useContext } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import Client from '../services/api'
+import UserContext from '../context/UserContext'
+import parseJwt from '../utils/parseJwt'
 
 export default function Login() {
+
   const navigate = useNavigate()
+  const user = useContext(UserContext)
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -14,6 +18,7 @@ export default function Login() {
     }).then((res) => {
       localStorage.setItem('access_token', res.data.access)
       localStorage.setItem('refresh_token', res.data.refresh)
+      user.id = parseJwt(res.data.access).user_id
       Client.defaults.headers['Authorization'] = 'Bearer ' + localStorage.getItem('access_token')
       navigate('/')
     })

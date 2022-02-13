@@ -10,6 +10,7 @@ const Login = lazy(() => import('./pages/Login'))
 const Register = lazy(() => import('./pages/Register'))
 const NewTicket = lazy(() => import('./components/NewTicket'))
 const TicketDetails = lazy(() => import('./pages/TicketDetails'))
+const TicketDetailsAdmin = lazy(() => import('./pages/TicketDetailsAdmin'))
 const EditTicket = lazy(() => import('./components/EditTicket'))
 
 
@@ -46,7 +47,9 @@ const EditTicket = lazy(() => import('./components/EditTicket'))
       checkToken()
       state.id = parseJwt(token).user_id
     }
-  },[])
+  },[token])
+
+  console.log('authed? ' + authenticated)
 
 
   return (
@@ -55,10 +58,11 @@ const EditTicket = lazy(() => import('./components/EditTicket'))
 
       <Routes>
 
-        <Route path="/" element={ <LayoutWithNav /> } >
+        <Route path="/" element={ <LayoutWithNav token={ token } /> } >
           <Route path="/" element={ <Home /> } />
           <Route path="/new-ticket" element={ <NewTicket /> } />
           <Route path="/tickets/:id" element={ <TicketDetails /> } />
+          <Route path="/tickets/admin/:id" element={ <TicketDetailsAdmin /> } />
           <Route path="/tickets/:id/edit" element={ <EditTicket /> } />
         </Route>
 

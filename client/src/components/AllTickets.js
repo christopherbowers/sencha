@@ -1,7 +1,6 @@
-import { useEffect, useState, useContext } from 'react'
+import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import Client from '../services/api'
-// import UserContext from '../context/UserContext'
 import styled from 'styled-components'
 
 export default function AllTickets({id}) {
@@ -36,8 +35,8 @@ export default function AllTickets({id}) {
       {tickets.map(ticket => {
         const { id, title, priority, status } = ticket
         return (
-        <Wrapper key={id} onClick={() => navigate(`/tickets/${ id }`)}>
-          <Link to={(`/tickets/${ id }`)}>ID: { id }</Link>
+        <Wrapper key={id} onClick={() => navigate(`/tickets/admin/${ id }`)}>
+          <Link to={(`/tickets/admin/${ id }`)}>ID: { id }</Link>
           <p><strong>Title:</strong> { title }</p>
           <p className={priority.name}>{ priority.name }</p>
           <p className="status">{ status }</p>

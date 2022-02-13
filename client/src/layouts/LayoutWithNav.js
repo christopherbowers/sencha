@@ -2,10 +2,10 @@ import { Outlet } from 'react-router-dom'
 import Sidebar from '../components/Sidebar'
 import Footer from '../components/Footer'
 
-export default function LayoutsWithNav() {
+export default function LayoutsWithNav({ token }) {
   return (
     <>
-      <Sidebar />
+      <Sidebar token={ token }/>
       <Outlet />
       <Footer />
     </>

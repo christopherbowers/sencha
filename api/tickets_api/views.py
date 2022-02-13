@@ -20,8 +20,18 @@ class TicketList(generics.ListAPIView):
   queryset = Ticket.objects.all()
   serializer_class = TicketSerializer
 
+class OpenTicketList(generics.ListAPIView):
+  permission_classes = [IsAdminUser]
+  queryset = Ticket.ticketobjects.all()
+  serializer_class = TicketSerializer
+
 class TicketDetails(generics.RetrieveUpdateDestroyAPIView, TicketUserPermission):
   permission_classes = [TicketUserPermission]
+  queryset = Ticket.objects.all()
+  serializer_class = TicketSerializer
+
+class TicketDetailsAdmin(generics.RetrieveUpdateDestroyAPIView):
+  permission_classes = [IsAdminUser]
   queryset = Ticket.objects.all()
   serializer_class = TicketSerializer
 
