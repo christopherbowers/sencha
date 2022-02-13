@@ -47,7 +47,7 @@ const EditTicket = lazy(() => import('./components/EditTicket'))
       checkToken()
       state.id = parseJwt(token).user_id
     }
-  },[token])
+  },[])
 
   console.log('authed? ' + authenticated)
 
