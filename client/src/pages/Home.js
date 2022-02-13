@@ -2,6 +2,7 @@ import { lazy, useContext, useEffect } from 'react'
 import UserContext from '../context/UserContext'
 import Client from '../services/api'
 const Tickets = lazy(() => import('../components/Tickets'))
+const AllTickets = lazy(() => import('../components/AllTickets'))
 
 export default function Home() {
 
@@ -41,7 +42,11 @@ export default function Home() {
         <h1 className="title">
           👋 Welcome { user.firstName }
         </h1>
-        <Tickets id={ user.id }/ >
+        { user.is_superuser ?
+          (<AllTickets id={ user.id }/ >)
+          :
+          (<Tickets id={ user.id }/ >)
+        }
       </main>
     </div>
   )

@@ -1,20 +1,21 @@
 import { useEffect, useState, useContext } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import Client from '../services/api'
-import UserContext from '../context/UserContext'
+// import UserContext from '../context/UserContext'
 import styled from 'styled-components'
 
-export default function Tickets({id}) {
+export default function AllTickets({id}) {
 
   const navigate = useNavigate()
-  const global = useContext(UserContext)
+
+
   const [tickets, setTickets] = useState([])
   const [loading, setLoading] = useState(true)
 
   const getTickets = async () => {
-    await Client.get(`/users/${id}/tickets/`)
+    await Client.get(`/tickets/`)
     .then((res) => {
-      setTickets(res.data.tickets)
+      setTickets(res.data)
       setLoading(false)
     })
   }
