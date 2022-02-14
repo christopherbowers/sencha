@@ -40,7 +40,10 @@ const EditTicket = lazy(() => import('./components/EditTicket'))
       token: token
     })
       .then(toggleAuthenticated(true))
-      .catch(toggleAuthenticated(false))
+      .catch(error =>{
+        console.error('Error:', error)
+        toggleAuthenticated(false)
+      })
   }
 
   useEffect(() => {
@@ -50,30 +53,33 @@ const EditTicket = lazy(() => import('./components/EditTicket'))
     }
   },[])
 
-  console.log('authed? ' + authenticated)
-
 
   return (
     <UserContext.Provider value={state}>
       <GlobalStyles />
     <Suspense fallback={<>loading...</>}>
       <Routes>
-
-        <Route path="/" element={ <LayoutWithNav token={ token } /> } >
+        { authenticated ?
+          <>
+        <Route path="/" element={ <LayoutWithNav /> } >
           <Route path="/" element={ <Home /> } />
           <Route path="/new-ticket" element={ <NewTicket /> } />
           <Route path="/tickets/:id" element={ <TicketDetails /> } />
           <Route path="/tickets/admin/:id" element={ <TicketDetailsAdmin /> } />
           <Route path="/tickets/:id/edit" element={ <EditTicket /> } />
         </Route>
-
-        <Route path="/login" element={ <LayoutWithoutNav /> }>
-          <Route path="/login" element={ <Login toggleAuthenticated={toggleAuthenticated}/> } />
+        </>
+        :
+        <>
+        <Route path="/" element={ <LayoutWithoutNav /> }>
+          <Route path="/" element={ <Login toggleAuthenticated={toggleAuthenticated}/> } />
         </Route>
 
         <Route path="/register" element={ <LayoutWithoutNav /> }>
           <Route path="/register" element={ <Register /> } />
         </Route>
+        </>
+      }
       </Routes>
     </Suspense>
     </UserContext.Provider>

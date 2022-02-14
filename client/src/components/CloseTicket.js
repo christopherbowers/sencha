@@ -5,7 +5,6 @@ export default function DeleteTicket({ id }) {
 
   const navigate = useNavigate()
   const closeTicket = async () => {
-    console.log(id)
     Client.patch(`tickets/admin/${ id }/`,{
       status: 'closed'
     })
