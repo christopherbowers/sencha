@@ -30,16 +30,10 @@ export default function Logout() {
 
 
     return (
-      <>
-      { !user ?
-      <Link to="/login">
-        Login
-      </Link>
-      :
-      <Link to="#" onClick={logout}>
-        Logout
-      </Link>
-      }
-      </>
+      <li>
+        <Link to="#" onClick={logout}>
+          Logout
+        </Link>
+      </li>
     )
 }

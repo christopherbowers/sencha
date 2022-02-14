@@ -1,6 +1,7 @@
 import { lazy, useContext, useEffect } from 'react'
 import UserContext from '../context/UserContext'
 import Client from '../services/api'
+import styled from 'styled-components'
 const Tickets = lazy(() => import('../components/Tickets'))
 const AllTickets = lazy(() => import('../components/AllTickets'))
 
@@ -37,8 +38,8 @@ export default function Home() {
 
 
   return (
-    <div className="container">
-      <main className="main">
+    <>
+    <Wrapper>
         <h1 className="title">
           👋 Welcome { user.firstName }
         </h1>
@@ -47,7 +48,18 @@ export default function Home() {
           :
           (<Tickets id={ user.id }/ >)
         }
-      </main>
-    </div>
+    </Wrapper>
+    </>
   )
 }
+
+const Wrapper = styled.div`
+  flex-grow: 1;
+  flex-basis: 100%;
+  flex: 1;
+
+  @media all and (min-width: 600px) {
+    flex: 3 0px;
+    margin: 0 40px;
+  }
+`
