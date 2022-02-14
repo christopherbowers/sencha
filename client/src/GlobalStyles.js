@@ -1,4 +1,5 @@
 import { createGlobalStyle } from 'styled-components'
+import { COLORS } from './constants'
 
 export const GlobalStyles = createGlobalStyle`
 
@@ -10,6 +11,7 @@ export const GlobalStyles = createGlobalStyle`
   }
   html, body {
     height: 100%;
+    color: ${COLORS.navy};
   }
   body {
     line-height: 1.5;
