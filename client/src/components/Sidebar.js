@@ -1,7 +1,9 @@
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import UserContext from '../context/UserContext'
 import { Link } from 'react-router-dom'
 import Logout from './Logout'
+import NewTicket from './NewTicket'
+import Modal from './Modal'
 import styled from 'styled-components'
 import { HiUser, HiHome, HiPencil } from 'react-icons/hi'
 
@@ -9,13 +11,19 @@ export default function Sidebar({toggleAuthenticated}) {
 
   const user = useContext(UserContext)
 
+  const [isOpen, setIsOpen] = useState(false)
+
+  const onClose = () => {
+    setIsOpen(false)
+  }
+
   return (
     <Wrapper>
       <h1>🌱 Sencha</h1>
       <Nav>
       <ul>
         <li>
-          <Link to="/new-ticket">
+          <Link to="#" onClick={() => setIsOpen(true)}>
             <Span><HiPencil /> New Ticket</Span>
           </Link>
         </li>
@@ -28,6 +36,11 @@ export default function Sidebar({toggleAuthenticated}) {
         </ul>
         <NameTag><HiUser/> <span>{ user.userName }</span></NameTag>
       </Nav>
+
+      <Modal open={isOpen}>
+        <NewTicket onClose={onClose}/>
+      </Modal>
+
     </Wrapper>
   )
 }
