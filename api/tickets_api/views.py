@@ -1,6 +1,6 @@
 from rest_framework import generics
 from tickets.models import Ticket
-from .serializers import TicketSerializer
+from .serializers import TicketSerializer, TicketStringSerializer
 from rest_framework.permissions import BasePermission, IsAdminUser, IsAuthenticated
 
 
@@ -18,12 +18,12 @@ class TicketUserPermission(BasePermission):
 class TicketList(generics.ListAPIView):
   permission_classes = [IsAdminUser]
   queryset = Ticket.objects.all()
-  serializer_class = TicketSerializer
+  serializer_class = TicketStringSerializer
 
 class OpenTicketList(generics.ListAPIView):
   permission_classes = [IsAdminUser]
   queryset = Ticket.ticketobjects.all()
-  serializer_class = TicketSerializer
+  serializer_class = TicketStringSerializer
 
 class TicketDetails(generics.RetrieveUpdateDestroyAPIView, TicketUserPermission):
   permission_classes = [TicketUserPermission]
@@ -33,7 +33,7 @@ class TicketDetails(generics.RetrieveUpdateDestroyAPIView, TicketUserPermission)
 class TicketDetailsAdmin(generics.RetrieveUpdateDestroyAPIView):
   permission_classes = [IsAdminUser]
   queryset = Ticket.objects.all()
-  serializer_class = TicketSerializer
+  serializer_class = TicketStringSerializer
 
 class TicketCreate(generics.CreateAPIView):
   permission_classes = [IsAuthenticated]
