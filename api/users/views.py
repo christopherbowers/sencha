@@ -51,7 +51,6 @@ class UserDetails(generics.RetrieveUpdateDestroyAPIView, AppUserPermission):
   queryset = AppUser.objects.all()
   serializer_class = AppUserSerializer
 
-
 class UserTickets(generics.RetrieveUpdateDestroyAPIView, AppUserPermission):
   permission_classes = [AppUserPermission]
   queryset = AppUser.objects.all()

@@ -3,18 +3,18 @@ import { Link, useNavigate } from 'react-router-dom'
 import Client from '../services/api'
 import styled from 'styled-components'
 
-
-export default function Tickets({id}) {
+export default function AllTickets({id}) {
 
   const navigate = useNavigate()
+
 
   const [tickets, setTickets] = useState([])
   const [loading, setLoading] = useState(true)
 
   const getTickets = async () => {
-    await Client.get(`/users/${id}/tickets/`)
+    await Client.get(`/tickets/`)
     .then((res) => {
-      setTickets(res.data.tickets)
+      setTickets(res.data)
       setLoading(false)
     })
   }
@@ -35,10 +35,10 @@ export default function Tickets({id}) {
       {tickets.map(ticket => {
         const { id, title, priority, status } = ticket
         return (
-        <Ticket key={id} onClick={() => navigate(`/tickets/${ id }`)}>
+        <Ticket key={id} onClick={() => navigate(`/tickets/admin/${ id }`)}>
           <p className="id">ID: { id }</p>
           <p className="title"><strong>Title:</strong> { title }</p>
-          <div className="priority"><p className={priority.name}>{ priority.name }</p></div>
+          <div className="priority"><p className={priority}>{ priority }</p></div>
           <p className="status">{ status }</p>
         </Ticket>
         )
@@ -82,6 +82,7 @@ const Ticket = styled.div`
 
   &:hover {
     background-color: hsl(0, 0%, 95%);
+
   }
 
   .Normal {
@@ -119,7 +120,6 @@ const Ticket = styled.div`
   }
 
 `
-
 
 
 

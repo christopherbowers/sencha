@@ -1,65 +1,91 @@
-import { Link, useNavigate } from 'react-router-dom'
-import Client from '../services/api'
+import { useContext } from 'react'
+import UserContext from '../context/UserContext'
+import { Link } from 'react-router-dom'
+import Logout from './Logout'
 import styled from 'styled-components'
 
 export default function Sidebar() {
-  const navigate = useNavigate()
 
-  const logout = async () => {
-    await Client.post('/users/logout/blacklist/', {
-      refresh_token: localStorage.getItem('refresh_token'),
-    })
-    localStorage.clear()
-    Client.defaults.headers['Authorization'] = null
-    navigate('/login')
-  }
-
-  const token = localStorage.access_token
+  const user = useContext(UserContext)
 
   return (
-    <section>
+    <Wrapper>
+      <h1>🌱 Sencha</h1>
       <Nav>
-        <Link to="/new-ticket">
-          New Ticket
-        </Link>
-        <Link to="/">
-          Dashboard
-        </Link>
-        { !token ?
-        <Link to="/login">
-          Login
-        </Link>
-        :
-        <Link to="#" onClick={logout}>
-          Logout
-        </Link>
+      <ul>
+        <li>
+          <Link to="/new-ticket">
+            New Ticket
+          </Link>
+        </li>
+        <li>
+          <Link to="/">
+            Dashboard
+          </Link>
+        </li>
+        {
+          user ? <Logout /> :
+          <li>
+          <Link to="/login">
+            Login
+          </Link>
+          </li>
         }
+        </ul>
       </Nav>
-    </section>
+    </Wrapper>
   )
 }
 
+const Wrapper = styled.div`
+  background-color: rgb(16, 24, 39);
+  color: rgb(255, 255, 255);
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: 100%;
+  min-width: 250px;
+  // padding-left: 24px;
+  text-align: center;
+
+  @media all and (min-width: 600px) {
+    text-align: left;
+    flex: 0 0;
+  }
+
+  h1 {
+    margin: 24px 0;
+    padding: 0 0 0 12px;
+  }
+
+`
 
 const Nav = styled.nav`
 
-  padding-top: 10px;
-  margin: 10px;
-
+  li a,
+  ul {
+    margin-left: 0;
+    padding-left: 0;
+    list-style: none;
+    position: relative;
+    padding: 6px;
+    display: block;
+    width: 100%;
+  }
 
   a {
-    color: hsl(122, 64%, 30%);
-    background-color: hsl(122, 64%, 77%);
-    padding: 6px 10px;
-    margin: 0 10px;
-    border-radius: 6px;
-    border: 3px solid transparent;
-    transition: all .3s;
-    transition-timing-function: ease-in-out;
+    color: rgb(255, 255, 255);
     text-decoration: none;
   }
 
-  a:hover {
-    border: 3px solid hsl(122, 64%, 30%);
+  li {
+    border-radius: 6px;
+    padding: 6px;
+    border: 3px solid transparent;
+    transition: all .3s;
+  }
+
+  li:hover {
+    background-color: hsl(122, 64%, 30%);
   }
 
 `

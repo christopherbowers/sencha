@@ -4,13 +4,15 @@ import { useNavigate } from 'react-router-dom'
 export default function DeleteTicket({ id }) {
 
   const navigate = useNavigate()
-  const deleteTicket = async () => {
+  const closeTicket = async () => {
     console.log(id)
-    Client.delete(`tickets/${ id }`)
-      .then(navigate('/tickets'))
+    Client.patch(`tickets/admin/${ id }/`,{
+      status: 'closed'
+    })
+      .then(navigate(-1))
   }
 
   return (
-    <button onClick={ deleteTicket }>Delete</button>
+    <button onClick={ closeTicket }>Close</button>
   )
 }

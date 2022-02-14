@@ -31,6 +31,9 @@ class Ticket(models.Model):
     objects = models.Manager() # Default all tickets
     ticketobjects = OpenTickets() # Send only open tickets
 
+    class Meta:
+      ordering = ('created_at',)
+
     def __str__(self):
       return self.title
 

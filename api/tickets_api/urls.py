@@ -1,10 +1,12 @@
 from django.urls import path
-from .views import TicketList, TicketDetails, TicketCreate
+from .views import OpenTicketList, TicketList, TicketDetails, TicketCreate, TicketDetailsAdmin
 
 app_name = 'tickets_api'
 
 urlpatterns = [
-  path('<int:pk>/', TicketDetails.as_view(), name='ticket_detail'),
-  path('', TicketList.as_view(), name='ticket_list'),
-  path('create/', TicketCreate.as_view(), name='ticket_create'),
+  path('<int:pk>/', TicketDetails.as_view()),
+  path('admin/<int:pk>/', TicketDetailsAdmin.as_view()),
+  path('', OpenTicketList.as_view()),
+  path('all/', TicketList.as_view()),
+  path('create/', TicketCreate.as_view()),
 ]

@@ -5,6 +5,7 @@ from tickets.models import Ticket
 class TicketSerializer(serializers.ModelSerializer):
 
   priority = serializers.StringRelatedField()
+  created_by = serializers.StringRelatedField()
 
   class Meta:
       model = Ticket
