@@ -40,9 +40,6 @@ export default function Home() {
   return (
     <>
     <Wrapper>
-        <h1 className="title">
-          👋 Welcome { user.firstName }
-        </h1>
         { user.is_superuser ?
           (<AllTickets id={ user.id }/ >)
           :
@@ -57,9 +54,10 @@ const Wrapper = styled.div`
   flex-grow: 1;
   flex-basis: 100%;
   flex: 1;
+  padding: 24px;
+  background-color: hsl(0, 0%, 90%);
 
   @media all and (min-width: 600px) {
     flex: 3 0px;
-    margin: 0 40px;
   }
 `

@@ -31,27 +31,38 @@ export default function AllTickets({id}) {
   }
 
   return (
-    <>
+    <Wrapper>
       {tickets.map(ticket => {
         const { id, title, priority, status } = ticket
         return (
-        <Wrapper key={id} onClick={() => navigate(`/tickets/admin/${ id }`)}>
-          <Link to={(`/tickets/admin/${ id }`)}>ID: { id }</Link>
-          <p><strong>Title:</strong> { title }</p>
-          <p className={priority.name}>{ priority.name }</p>
+        <Ticket key={id} onClick={() => navigate(`/tickets/admin/${ id }`)}>
+          <p className="id">ID: { id }</p>
+          <p className="title"><strong>Title:</strong> { title }</p>
+          <div className="priority"><p className={priority}>{ priority }</p></div>
           <p className="status">{ status }</p>
-        </Wrapper>
+        </Ticket>
         )
       })}
-    </>
+    </Wrapper>
   )
 }
 
 
 const Wrapper = styled.div`
-  border: 1px solid black;
-  margin-bottom: 10px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 6px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 
+`
+
+const Ticket = styled.div`
+
+  &:first-child {
+    border: 0;
+  }
+  border-top: 1px solid hsl(0, 0%, 80%);
+
+  padding: 0 24px;
   text-align: left;
   display: flex;
   flex-flow: row nowrap;
@@ -60,8 +71,18 @@ const Wrapper = styled.div`
   transition: all .2s;
   cursor: pointer;
 
+  .title {
+    flex-grow: 4;
+  }
+
+  .id {
+    min-width: 100px;
+    max-width: 100px;
+    flex-grow: 1;
+  }
+
   &:hover {
-    background-color: lightgray;
+    background-color: hsl(0, 0%, 95%);
   }
 
   .Normal {
@@ -77,14 +98,28 @@ const Wrapper = styled.div`
     background-color: hsl(123, 50%, 50%);
   }
 
-  .Normal,
-  .High,
-  .Low {
-   padding: 8px 12px 6px 12px;
+  .priority p {
+   padding: 3px 6px;
+   margin: 10px;
    border-radius: 16px;
+   flex-grow: 0;
+   text-align: center;
+   align-items: center;
   }
-`
 
+  .priority {
+     min-width: 100px;
+     max-width: 100px;
+   }
+
+  .status {
+    text-transform: capitalize;
+    flex-grow: 0;
+    min-width: 100px;
+    text-align: right;
+  }
+
+`
 
 
 
