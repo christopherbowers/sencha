@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import Logout from './Logout'
 import NewTicket from './NewTicket'
 import Modal from './Modal'
+import Button from './Button'
 import styled from 'styled-components'
 import { HiUser, HiHome, HiPencil } from 'react-icons/hi'
 
@@ -14,6 +15,7 @@ export default function Sidebar({toggleAuthenticated}) {
   const [isOpen, setIsOpen] = useState(false)
 
   const onClose = () => {
+    console.log('clicked')
     setIsOpen(false)
   }
 
@@ -37,8 +39,8 @@ export default function Sidebar({toggleAuthenticated}) {
         <NameTag><HiUser/> <span>{ user.userName }</span></NameTag>
       </Nav>
 
-      <Modal open={isOpen}>
-        <NewTicket onClose={onClose}/>
+      <Modal open={isOpen} >
+        <NewTicket setIsOpen={setIsOpen} onClose={() => setIsOpen(false)} />
       </Modal>
 
     </Wrapper>

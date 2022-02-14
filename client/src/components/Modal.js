@@ -1,11 +1,12 @@
 import styled from 'styled-components'
 
-export default function Modal({ open, children }) {
+export default function Modal({ open, children, onClose }) {
 
   if (!open) {
     return (null)
   }
 
+      // <button onClick={onClose}>Close Modal</button>
   return (
     <Overlay>
       <Wrapper>
