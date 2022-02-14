@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import UserContext from '../context/UserContext'
 import Client from '../services/api'
 
-export default function Logout() {
+export default function Logout({toggleAuthenticated}) {
 
     const navigate = useNavigate()
 
@@ -24,6 +24,7 @@ export default function Logout() {
         })
         localStorage.clear()
         Client.defaults.headers['Authorization'] = null
+        toggleAuthenticated(false)
         navigate('/')
       })
     }
