@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import Logout from './Logout'
 import styled from 'styled-components'
 
-export default function Sidebar() {
+export default function Sidebar({toggleAuthenticated}) {
 
   const user = useContext(UserContext)
 
@@ -24,7 +24,7 @@ export default function Sidebar() {
           </Link>
         </li>
         {
-          user ? <Logout /> :
+          user ? <Logout toggleAuthenticated={toggleAuthenticated}/> :
           <li>
           <Link to="/login">
             Login

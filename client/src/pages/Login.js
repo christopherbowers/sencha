@@ -4,7 +4,7 @@ import Client from '../services/api'
 import UserContext from '../context/UserContext'
 import parseJwt from '../utils/parseJwt'
 
-export default function Login() {
+export default function Login({toggleAuthenticated}) {
 
   const navigate = useNavigate()
   const user = useContext(UserContext)
@@ -20,8 +20,10 @@ export default function Login() {
       localStorage.setItem('refresh_token', res.data.refresh)
       user.id = parseJwt(res.data.access).user_id
       Client.defaults.headers['Authorization'] = 'Bearer ' + localStorage.getItem('access_token')
+      toggleAuthenticated(true)
       navigate('/')
-    })
+    }
+  )
   }
 
 
