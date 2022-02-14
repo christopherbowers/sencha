@@ -52,7 +52,6 @@ const Wrapper = styled.div`
   background-color: rgb(255, 255, 255);
   border-radius: 6px;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
-
 `
 
 const Ticket = styled.div`
