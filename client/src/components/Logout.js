@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import UserContext from '../context/UserContext'
 import Client from '../services/api'
 import styled from 'styled-components'
-import { HiLogin } from 'react-icons/hi'
+import { HiLockClosed } from 'react-icons/hi'
 
 export default function Logout({toggleAuthenticated}) {
 
@@ -35,7 +35,7 @@ export default function Logout({toggleAuthenticated}) {
   return (
     <li>
       <Link to="#" onClick={logout}>
-        <Span><HiLogin /> Logout</Span>
+        <Span><HiLockClosed /> Logout</Span>
       </Link>
     </li>
   )

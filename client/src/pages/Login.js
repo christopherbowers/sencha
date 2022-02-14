@@ -3,6 +3,9 @@ import { Link, useNavigate } from 'react-router-dom'
 import Client from '../services/api'
 import UserContext from '../context/UserContext'
 import parseJwt from '../utils/parseJwt'
+// import { COLORS } from '../constants'
+import Button from '../components/Button'
+import styled from 'styled-components'
 
 export default function Login({toggleAuthenticated}) {
 
@@ -28,22 +31,36 @@ export default function Login({toggleAuthenticated}) {
 
 
   return (
-    <>
-      <h1>Log In</h1>
+    <Wrapper>
+      <h2>Log In</h2>
       <div>
-        <form onSubmit={handleSubmit}>
+        <Form onSubmit={handleSubmit}>
           <label htmlFor="email">Email</label>
           <input type="email" name="email" required />
           <label htmlFor="password">Password</label>
           <input type="password" name="password" required />
-          <button type="submit">Login</button>
-        </form>
+          <Button text={'Login'} />
+        </Form>
       </div>
       <div>
         <Link to="/register">
           Don't have an account? Sign Up.
         </Link>
       </div>
-    </>
+    </Wrapper>
   )
 }
+
+const Wrapper = styled.div`
+  text-align: left;
+`
+
+const Form = styled.form`
+  input {
+    margin-bottom: 10px;
+  }
+
+  tex-align: left;
+  display: flex;
+  flex-flow: column nowrap;
+`
