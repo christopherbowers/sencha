@@ -29,11 +29,11 @@ export default function EditTicket() {
 
   const handleSubmit = async (e) =>  {
     e.preventDefault()
-    await Client.put(`/tickets/${ id }/`,{
+    await Client.patch(`/tickets/${ id }/edit/`,{
       created_by: global.id,
       title: e.target.title.value,
       description: e.target.description.value,
-      priority: priority,
+      priority: parseInt(priority.priority),
       status: 'open',
      })
       .then((res) => { navigate(-1)})
