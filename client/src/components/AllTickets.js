@@ -36,7 +36,7 @@ export default function AllTickets({id}) {
         const { id, title, priority, status } = ticket
         return (
         <Ticket key={id} onClick={() => navigate(`/tickets/admin/${ id }`)}>
-          <Link className="id" to={(`/tickets/admin/${ id }`)}>ID: { id }</Link>
+          <p className="id">ID: { id }</p>
           <p className="title"><strong>Title:</strong> { title }</p>
           <div className="priority"><p className={priority}>{ priority }</p></div>
           <p className="status">{ status }</p>
@@ -52,7 +52,6 @@ const Wrapper = styled.div`
   background-color: rgb(255, 255, 255);
   border-radius: 6px;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
-
 `
 
 const Ticket = styled.div`
@@ -62,8 +61,7 @@ const Ticket = styled.div`
   }
   border-top: 1px solid hsl(0, 0%, 80%);
 
-  padding: 0 12px;
-
+  padding: 0 24px;
   text-align: left;
   display: flex;
   flex-flow: row nowrap;
@@ -80,11 +78,11 @@ const Ticket = styled.div`
     min-width: 100px;
     max-width: 100px;
     flex-grow: 1;
-
   }
 
   &:hover {
-    background-color: hsl(0, 0%, 97%);
+    background-color: hsl(0, 0%, 95%);
+
   }
 
   .Normal {
@@ -117,6 +115,8 @@ const Ticket = styled.div`
   .status {
     text-transform: capitalize;
     flex-grow: 0;
+    min-width: 100px;
+    text-align: right;
   }
 
 `
