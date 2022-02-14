@@ -1,9 +1,9 @@
 import styled from 'styled-components'
 import { COLORS } from '../constants'
 
-export default function ButtonSubmit({ text, type }) {
+export default function ButtonSubmit({ text }) {
   return (
-    <Button type={ type }>{ text }</Button>
+    <Button>{ text }</Button>
   )
 }
 

@@ -7,7 +7,7 @@ import styled from 'styled-components'
 
 
 
-export default function NewTicket({onClose}) {
+export default function NewTicket({ onClose }) {
 
   const global = useContext(UserContext)
   // const navigate = useNavigate()
@@ -47,8 +47,8 @@ export default function NewTicket({onClose}) {
           <option value="2">High</option>
           <option value="3">Low</option>
         </select>
-        <Button text={'Submit'} type={'submit'}/>
-        <Button text={'Cancel'} type={'button'} onClick={ onClose } />
+        <Button text={'Submit'} type="submit" />
+        <CloseButton onClick={onClose}>Cancel</CloseButton>
       </Form>
 
     </Wrapper>
@@ -60,6 +60,7 @@ const Wrapper = styled.div`
   Background: white;
   color: ${COLORS.navy};
   padding: 24px;
+  border-radius: 12px;
 
 `
 
@@ -67,4 +68,21 @@ const Form = styled.form`
   tex-align: left;
   display: flex;
   flex-flow: column nowrap;
+`
+
+const CloseButton = styled.button`
+  display: inline-block;
+  border-radius: 6px;
+  padding: 0.5rem 0;
+  margin: 0.5rem 3rem;
+  border: none;
+  cursor: pointer;
+  transition: .2s;
+
+  color: ${COLORS.textLight};
+  background-color: ${COLORS.navy};
+
+  &:hover {
+    background: ${COLORS.navyHover}
+  }
 `

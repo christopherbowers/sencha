@@ -12,6 +12,7 @@ export default function EditTicket() {
   const [ticket, setTicket] = useState({})
   const [priority, setPriority] = useState(null)
 
+  console.log(priority)
 
   const getTicketDetails = async () =>  {
     await Client.get(`/tickets/${ id }`)
@@ -33,7 +34,7 @@ export default function EditTicket() {
       created_by: global.id,
       title: e.target.title.value,
       description: e.target.description.value,
-      priority: parseInt(priority.priority),
+      priority: parseInt(priority),
       status: 'open',
      })
       .then((res) => { navigate(-1)})
@@ -49,7 +50,6 @@ export default function EditTicket() {
       getTicketDetails()
     },[id])
 
-    console.log(ticket)
 
   return (
     <>
