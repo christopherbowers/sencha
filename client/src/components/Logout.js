@@ -24,7 +24,7 @@ export default function Logout() {
         })
         localStorage.clear()
         Client.defaults.headers['Authorization'] = null
-        navigate('/login')
+        navigate('/')
       })
     }
 

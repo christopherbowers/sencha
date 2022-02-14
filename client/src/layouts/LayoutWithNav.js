@@ -1,7 +1,7 @@
 import { Outlet } from 'react-router-dom'
 import styled from 'styled-components'
 import Sidebar from '../components/Sidebar'
-// import Footer from '../components/Footer'
+
 
 export default function LayoutsWithNav() {
   return (
@@ -9,7 +9,6 @@ export default function LayoutsWithNav() {
       <Wrapper>
         <Sidebar />
         <Outlet />
-
       </Wrapper>
     </>
   )
