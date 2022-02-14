@@ -28,6 +28,11 @@ class OpenTicketList(generics.ListAPIView):
 class TicketDetails(generics.RetrieveUpdateDestroyAPIView, TicketUserPermission):
   permission_classes = [TicketUserPermission]
   queryset = Ticket.objects.all()
+  serializer_class = TicketStringSerializer
+
+class TicketEditDetails(generics.RetrieveUpdateDestroyAPIView, TicketUserPermission):
+  permission_classes = [TicketUserPermission]
+  queryset = Ticket.objects.all()
   serializer_class = TicketSerializer
 
 class TicketDetailsAdmin(generics.RetrieveUpdateDestroyAPIView):
