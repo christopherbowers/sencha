@@ -22,7 +22,8 @@ export default function Login({toggleAuthenticated}) {
       Client.defaults.headers['Authorization'] = 'Bearer ' + localStorage.getItem('access_token')
       toggleAuthenticated(true)
       navigate('/')
-    })
+    }
+  )
   }
 
 

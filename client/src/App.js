@@ -1,6 +1,7 @@
-import { Suspense, lazy, useState, useEffect } from 'react'
+import { Suspense, lazy, useState, useEffect, useContext } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import UserContext from './context/UserContext'
+import AuthContext from './context/AuthContext'
 import Client from './services/api'
 import parseJwt from './utils/parseJwt'
 import { GlobalStyles } from './GlobalStyles'
@@ -31,8 +32,8 @@ const EditTicket = lazy(() => import('./components/EditTicket'))
   function update(data) {
     setState(Object.assign({}, state, data))
   }
-
   const [authenticated, toggleAuthenticated] = useState(false)
+
   const token = localStorage.access_token
 
   const checkToken = async () => {
@@ -56,12 +57,12 @@ const EditTicket = lazy(() => import('./components/EditTicket'))
 
   return (
     <UserContext.Provider value={state}>
-      <GlobalStyles />
-    <Suspense fallback={<>loading...</>}>
+    <GlobalStyles />
+    <Suspense fallback={<>Loading...</>}>
       <Routes>
         { authenticated ?
           <>
-        <Route path="/" element={ <LayoutWithNav /> } >
+        <Route path="/" element={ <LayoutWithNav toggleAuthenticated={ toggleAuthenticated } /> } >
           <Route path="/" element={ <Home /> } />
           <Route path="/new-ticket" element={ <NewTicket /> } />
           <Route path="/tickets/:id" element={ <TicketDetails /> } />
@@ -72,7 +73,7 @@ const EditTicket = lazy(() => import('./components/EditTicket'))
         :
         <>
         <Route path="/" element={ <LayoutWithoutNav /> }>
-          <Route path="/" element={ <Login toggleAuthenticated={toggleAuthenticated}/> } />
+          <Route path="/" element={ <Login toggleAuthenticated={ toggleAuthenticated } /> } />
         </Route>
 
         <Route path="/register" element={ <LayoutWithoutNav /> }>

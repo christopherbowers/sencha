@@ -3,11 +3,11 @@ import styled from 'styled-components'
 import Sidebar from '../components/Sidebar'
 
 
-export default function LayoutsWithNav() {
+export default function LayoutsWithNav({toggleAuthenticated}) {
   return (
     <>
       <Wrapper>
-        <Sidebar />
+        <Sidebar toggleAuthenticated={ toggleAuthenticated } />
         <Outlet />
       </Wrapper>
     </>

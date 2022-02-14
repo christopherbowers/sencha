@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom'
 import Client from '../services/api'
 import DeleteTicket from '../components/DeleteTicket'
 import CloseTicket from '../components/CloseTicket'
+import styled from 'styled-components'
 
 export default function TicketDetail() {
   const navigate = useNavigate()
@@ -25,7 +26,7 @@ export default function TicketDetail() {
   },[id])
 
   return (
-    <>
+    <Wrapper>
     <h1>{ ticket.title }</h1>
     <p>{ ticket.priority }</p>
     <p>{ ticket.description }</p>
@@ -36,6 +37,19 @@ export default function TicketDetail() {
     </button>
     <DeleteTicket id={ id } />
     <CloseTicket id={ id } getTicketDetails={getTicketDetails}/>
-    </>
+    </Wrapper>
   )
 }
+
+
+const Wrapper = styled.div`
+  flex-grow: 1;
+  flex-basis: 100%;
+  flex: 1;
+  padding: 24px;
+  background-color: hsl(0, 0%, 90%);
+
+  @media all and (min-width: 600px) {
+    flex: 3 0px;
+  }
+`
