@@ -4,6 +4,7 @@ import UserContext from './context/UserContext'
 import Client from './services/api'
 import parseJwt from './utils/parseJwt'
 import { GlobalStyles } from './GlobalStyles'
+import Loading from './components/Loading'
 const LayoutWithNav = lazy(() => import( './layouts/LayoutWithNav'))
 const LayoutWithoutNav = lazy(() => import( './layouts/LayoutWithoutNav'))
 const Home = lazy(() => import('./pages/Home'))
@@ -57,7 +58,7 @@ const EditTicket = lazy(() => import('./components/EditTicket'))
   return (
     <UserContext.Provider value={state}>
     <GlobalStyles />
-    <Suspense fallback={<>Loading...</>}>
+    <Suspense fallback={<Loading />}>
       <Routes>
         { authenticated ?
           <>

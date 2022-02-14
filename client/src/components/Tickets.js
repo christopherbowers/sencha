@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import Loading from './Loading'
 import Client from '../services/api'
 import styled from 'styled-components'
 
@@ -27,7 +28,7 @@ export default function Tickets({id}) {
 
 
   if (loading) {
-    return <>Loading...</>
+    return <Loading />
   }
 
   return (
