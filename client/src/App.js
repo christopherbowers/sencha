@@ -1,7 +1,6 @@
-import { Suspense, lazy, useState, useEffect, useContext } from 'react'
+import { Suspense, lazy, useState, useEffect } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import UserContext from './context/UserContext'
-import AuthContext from './context/AuthContext'
 import Client from './services/api'
 import parseJwt from './utils/parseJwt'
 import { GlobalStyles } from './GlobalStyles'

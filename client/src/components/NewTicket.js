@@ -1,13 +1,16 @@
 import { useContext, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
 import Client from '../services/api'
+import Button from './Button'
 import UserContext from '../context/UserContext'
+import { COLORS } from '../constants'
+import styled from 'styled-components'
 
 
-export default function NewTicket() {
+
+export default function NewTicket({onClose}) {
 
   const global = useContext(UserContext)
-  const navigate = useNavigate()
+  // const navigate = useNavigate()
   const [priority, setPriority] = useState(1)
   const handleChange = (e) => {
     setPriority({[e.target.name]: e.target.value})
@@ -22,16 +25,16 @@ export default function NewTicket() {
       priority: priority,
       status: 'open',
     })
-      .then((res) => navigate('/'))
-      .catch(error => alert('There was an error'))
+      .then( onClose() )
+      .catch(error => alert('There was an', error))
   }
 
 
   return (
-    <>
-      <h2>Create Ticket</h2>
+    <Wrapper>
+      <h2>New Ticket</h2>
 
-      <form onSubmit={handleSubmit}>
+      <Form onSubmit={handleSubmit}>
         <label htmlFor='title'>Title</label>
         <input type='text' name='title' required />
 
@@ -44,9 +47,24 @@ export default function NewTicket() {
           <option value="2">High</option>
           <option value="3">Low</option>
         </select>
-        <button type='submit'>Submit</button>
-      </form>
+        <Button text={'Submit'} type={'submit'}/>
+        <Button text={'Cancel'} type={'button'} onClick={ onClose } />
+      </Form>
 
-    </>
+    </Wrapper>
   )
 }
+
+
+const Wrapper = styled.div`
+  Background: white;
+  color: ${COLORS.navy};
+  padding: 24px;
+
+`
+
+const Form = styled.form`
+  tex-align: left;
+  display: flex;
+  flex-flow: column nowrap;
+`

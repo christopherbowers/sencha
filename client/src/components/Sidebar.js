@@ -1,12 +1,21 @@
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import UserContext from '../context/UserContext'
 import { Link } from 'react-router-dom'
 import Logout from './Logout'
+import NewTicket from './NewTicket'
+import Modal from './Modal'
 import styled from 'styled-components'
+import { HiUser, HiHome, HiPencil } from 'react-icons/hi'
 
 export default function Sidebar({toggleAuthenticated}) {
 
   const user = useContext(UserContext)
+
+  const [isOpen, setIsOpen] = useState(false)
+
+  const onClose = () => {
+    setIsOpen(false)
+  }
 
   return (
     <Wrapper>
@@ -14,25 +23,24 @@ export default function Sidebar({toggleAuthenticated}) {
       <Nav>
       <ul>
         <li>
-          <Link to="/new-ticket">
-            New Ticket
+          <Link to="#" onClick={() => setIsOpen(true)}>
+            <Span><HiPencil /> New Ticket</Span>
           </Link>
         </li>
         <li>
           <Link to="/">
-            Dashboard
+            <Span><HiHome /> Dashboard</Span>
           </Link>
         </li>
-        {
-          user ? <Logout toggleAuthenticated={toggleAuthenticated}/> :
-          <li>
-          <Link to="/login">
-            Login
-          </Link>
-          </li>
-        }
+        <Logout toggleAuthenticated={toggleAuthenticated}/>
         </ul>
+        <NameTag><HiUser/> <span>{ user.userName }</span></NameTag>
       </Nav>
+
+      <Modal open={isOpen}>
+        <NewTicket onClose={onClose}/>
+      </Modal>
+
     </Wrapper>
   )
 }
@@ -57,6 +65,7 @@ const Wrapper = styled.div`
     padding: 0 0 0 12px;
   }
 
+  svg { margin-right: 6px; }
 `
 
 const Nav = styled.nav`
@@ -88,4 +97,18 @@ const Nav = styled.nav`
     background-color: hsl(122, 64%, 30%);
   }
 
+`
+
+
+const NameTag = styled.div`
+  bottom: 0;
+  position: absolute;
+  padding: 24px;
+  display: flex;
+  align-items: center;
+`
+
+const Span = styled.div`
+  display: flex;
+  align-items: center;
 `

@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import Button from '../components/Button'
 import styled from 'styled-components'
 import Client from '../services/api'
 
@@ -35,16 +36,14 @@ export default function Register() {
         last_name: formData.last_name,
         password: formData.password,
       })
-      .then((res) => {
-        navigate('/login')
-      })
+      // .then(navigate('/'))
   }
 
   return (
     <>
-      <h1>Register</h1>
-      <FormWrapper>
-        <form onSubmit={handleSubmit}>
+      <Wrapper>
+      <h2>Register</h2>
+        <Form onSubmit={handleSubmit}>
           <label htmlFor='email'>Email</label>
           <input type='text' name='email' required onChange={handleChange} />
 
@@ -59,11 +58,11 @@ export default function Register() {
 
           <label htmlFor='password'>Password</label>
           <input type='password' name='password' required onChange={handleChange} />
-          <button type='submit'>Register</button>
-        </form>
-      </FormWrapper>
+          <Button text={'Register'} />
+        </Form>
+      </Wrapper>
       <div>
-        <Link to='login'>
+        <Link to='/'>
           Already have an account? Log in.
         </Link>
       </div>
@@ -71,13 +70,17 @@ export default function Register() {
   )
 }
 
-const FormWrapper = styled.div`
-  form {
-    display: flex;
-    flex-flow: column nowrap;
-    justify-content: center;
-    align-items: center;
-    margin: 0 10px;
-    margin: 0 10px;
+const Wrapper = styled.div`
+  text-align: left;
+`
+
+
+const Form = styled.form`
+  input {
+    margin-bottom: 10px;
   }
+
+  tex-align: left;
+  display: flex;
+  flex-flow: column nowrap;
 `
