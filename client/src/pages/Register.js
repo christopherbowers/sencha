@@ -36,7 +36,11 @@ export default function Register() {
         last_name: formData.last_name,
         password: formData.password,
       })
-      // .then(navigate('/'))
+      .then((res) => {
+        if(res.status === 201) {
+          navigate('/')
+        }
+      })
   }
 
   return (
